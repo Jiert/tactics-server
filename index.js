@@ -29,13 +29,12 @@ socket.on('connection', function(client){
 
   // Testing idea of reacting to emits
   // Listen for emit, then dispatch action
-  client.on('addUnit', unit => {
-    socket.emit('addUnit', unit);
-  }) 
+  client.on('addUnit', (unit, location) => {
+    socket.emit('addUnit', unit, location);
+  })
 
-  // Will this work a second time?
-  client.on('setActiveUnit', (unitId, location) => {
-    socket.emit('setActiveUnit', unitId, location);
+  client.on('setUnitLocation', (unitId, location) => {
+    socket.emit('setUnitLocation', unitId, location);
   })
 
   client.on('player', player => {
