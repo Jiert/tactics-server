@@ -10,26 +10,23 @@ const initialState = {
 const move = (state = initialState, action) => {
   switch (action.type) {  
     case 'SET_MOVE_ACTIVE':
-      return {
-        ...state,
+      return Object.assign({}, state, {
         mode: action.payload
-      }
+      })
 
     case 'SET_ATTACKING_UNIT':
-      return {
-        ...state,
+      return Object.assign({}, state, {
         attackingUnitId: action.payload
-      }
+      })
 
     case 'SET_DESTINATION_INTENT':
-      return {
-        ...state,
-        intendedDestination: action.payload
-      }
+      return Object.assign({}, state, {
+        intendedDestination: action.payload        
+      })
       
     default:
       return state
   }
 }
 
-export default move;
+module.exports = move;

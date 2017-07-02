@@ -1,27 +1,25 @@
-module.exports = (state = {}, action) => { 
+// if we define these as functions and not modules, 
+//we can pass them arround on both sides
+
+const units = (state = {}, action) => { 
   switch (action.type) {  
     case 'ADD_UNIT':
-      const newState = Object.assign({}, state, {
+      return Object.assign({}, state, {
         [action.payload.id]: action.payload
       });
 
-      console.log('we are in the reducer with new state: ')
-      return newState;
-        // ...state,
-        // [action.payload.id]: action.payload
-      // }
-
     // case 'UPDATE_UNIT':
-    //   return {
-    //     ...state,
+    //   return Object.assign({}, state, {
     //     [action.payload.id]: {
     //       ...state[action.payload.id],
     //       ...action.payload.updates
-    //     }
-    //   } 
+    //     }        
+    //   })
 
     default:
       return state
   }
 };
+
+module.exports = units;
 

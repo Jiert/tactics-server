@@ -10,4 +10,4 @@ const turn = (state = 0, action) => {
   }
 }
 
-export default turn;
+module.exports = turn;

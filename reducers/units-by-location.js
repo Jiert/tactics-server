@@ -7,14 +7,13 @@ const unitsByLocation = (state = {}, action) => {
       const location = action.payload.location;
       const coords = `${location.x}.${location.y}`;
 
-      return {
-        ...state,
+      return Object.assign({}, state, {
         [coords]: action.payload.id
-      };
+      })
 
     default:
       return state;
   }
 }
 
-export default unitsByLocation;
+module.exports = unitsByLocation;

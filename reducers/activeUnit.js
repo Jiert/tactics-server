@@ -11,4 +11,4 @@ const activeUnit = (state = {}, action) => {
   }
 }
 
-export default activeUnit;
+module.exports = activeUnit;
