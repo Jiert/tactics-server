@@ -29,11 +29,16 @@ const createNewWarrior = () => ({
 
 let store = createStore(battleApp);
 
-console.log('initial store state: ', store.getState())
+const listener = () => {
+  console.log('the state of the store has changed: ', store.getState());
+}
 
-store.dispatch(actions.addUnit(createNewWarrior()))
+const unsubscribe = store.subscribe(listener); 
 
-console.log('new store state: ', store.getState())
+// example of a dispatch
+// store.dispatch(actions.addUnit(createNewWarrior()))
+
+console.log('we have a store: ', store.getState())
 
 // Start the server at port 8080
 var server = http.createServer(function(req, res){ 
@@ -45,15 +50,15 @@ var server = http.createServer(function(req, res){
 server.listen(8080);
 
 // Create a Socket.IO instance, passing it our server
-// io.set('origins', 'http://localhost:3000');
 var socket = io.listen(server);
-
 socket.set('origins', 'http://localhost:3000');
 
 const players = [];
 
 // Add a connect listener
 socket.on('connection', function(client){ 
+
+  socket.emit('hydrateStore', store.getState())
 
   // Success!  Now listen to messages to be received
   client.on('turn',function(event){ 
@@ -63,8 +68,12 @@ socket.on('connection', function(client){
   // Testing idea of reacting to emits
   // Listen for emit, then dispatch action
   client.on('addUnit', (unit, location) => {
-    // socket.emit('addUnit', unit, location);
 
+    socket.emit('addUnit', unit, location);
+
+    // Okay so we're getting units in server redux state now
+    store.dispatch(actions.addUnit(unit))
+    store.dispatch(actions.setUnitLocation(unit.id, location))
   })
 
   client.on('setUnitLocation', (unitId, location) => {

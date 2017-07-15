@@ -4,6 +4,7 @@
 const units = (state = {}, action) => { 
   switch (action.type) {  
     case 'ADD_UNIT':
+      console.log('helllo from reducer!')
       return Object.assign({}, state, {
         [action.payload.id]: action.payload
       });
