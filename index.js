@@ -51,6 +51,10 @@ socket.on('connection', client => {
     store.dispatch(actions.setUnitLocation(unitId, location));
   })
 
+  client.on('updateUnit', (unitId, updates) => {
+    store.dispatch(actions.updateUnit(unitId, updates));
+  });
+
   client.on('disconnect', () => {
     console.log('Client has disconnected');
   });
