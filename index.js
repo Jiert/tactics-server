@@ -6,15 +6,6 @@ const {createStore} = require('redux');
 const battleApp = require('./reducers');
 const actions = require('./actions');
 
-const createNewWarrior = () => ({
-  id: new Date().toISOString(),
-  name: 'Warrior',
-  maxHealth: 10,
-  health: 10,
-  mobility: 2,
-  symbol: '⚔'
-})
-
 const store = createStore(battleApp);
 const server = http.createServer( (req, res) => { 
   // Send HTML headers and message
@@ -30,6 +21,7 @@ socket.set('origins', 'http://localhost:3000');
 
 // Subscribe to Redux
 const listener = () => {
+  console.log('state', store.getState())
   socket.emit('change', store.getState())
 }
 
@@ -54,6 +46,10 @@ socket.on('connection', client => {
   client.on('updateUnit', (unitId, updates) => {
     store.dispatch(actions.updateUnit(unitId, updates));
   });
+
+  client.on('submitPlayerRequest', player => {
+    store.dispatch(actions.addPlayer(player));
+  })
 
   client.on('disconnect', () => {
     console.log('Client has disconnected');

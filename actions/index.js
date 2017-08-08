@@ -1,5 +1,4 @@
 const addUnit = unit => {
-  console.log('addUnit called ', unit)
   return {
     type: 'ADD_UNIT',
     payload: unit
@@ -26,9 +25,17 @@ const finishTurn = id => {
   }
 }
 
+const addPlayer = player => {
+  return {
+    type: 'ADD_PLAYER',
+    payload: player
+  }
+}
+
 module.exports = {
   addUnit,
   updateUnit,
   setUnitLocation,
-  finishTurn
+  finishTurn,
+  addPlayer
 }

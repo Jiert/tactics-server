@@ -1,6 +1,3 @@
-// if we define these as functions and not modules, 
-//we can pass them arround on both sides
-
 const units = (state = {}, action) => { 
   switch (action.type) {  
     case 'ADD_UNIT':
