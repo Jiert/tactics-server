@@ -27,8 +27,10 @@ const listener = () => {
 
 const unsubscribe = store.subscribe(listener);
 
-socket.on('connection', client => { 
+socket.on('connection', client => {
   console.log('client connection')
+
+  socket.emit('connect');
 
   client.on('getState', () => {
     socket.emit('change', store.getState())
