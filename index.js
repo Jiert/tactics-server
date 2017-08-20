@@ -53,6 +53,15 @@ socket.on('connection', client => {
     store.dispatch(actions.addPlayer(player));
   })
 
+  client.on('setActivePlayer', playerId => {
+    if (playerId) {
+      store.dispatch(actions.setActivePlayer(playerId));
+    } else {
+      const firstId = Object.keys(store.getState().players)[0]
+      store.dispatch(actions.setActivePlayer(firstId))
+    }
+  });
+
   client.on('disconnect', () => {
     console.log('Client has disconnected');
   });

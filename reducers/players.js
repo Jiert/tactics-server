@@ -6,6 +6,11 @@ const players = (state = {}, action) => {
         [action.payload.id]: action.payload
       });
 
+    case 'SET_ACTIVE_PLAYER':
+      if (!action.payload) {
+        return Object.keys(state)[0]
+      }
+
     default:
       return state
   }

@@ -32,10 +32,18 @@ const addPlayer = player => {
   }
 }
 
+const setActivePlayer = playerId => {
+  return {
+    type: 'SET_ACTIVE_PLAYER',
+    payload: playerId
+  }
+}
+
 module.exports = {
   addUnit,
+  addPlayer,
   updateUnit,
-  setUnitLocation,
   finishTurn,
-  addPlayer
+  setActivePlayer,
+  setUnitLocation
 }
