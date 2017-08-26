@@ -49,6 +49,7 @@ socket.on('connection', client => {
     store.dispatch(actions.updateUnit(unitId, updates));
   });
 
+  // TODO: Limit number of requests
   client.on('submitPlayerRequest', player => {
     store.dispatch(actions.addPlayer(player));
   })
