@@ -12,5 +12,15 @@
     "http": "0.0.0",
     "redux": "^3.7.1",
     "socket.io": "^2.0.3"
+  },
+  "eslintConfig": {
+    "extends": "planet/react",
+    "parserOptions": {
+      "ecmaVersion": "2017",
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "experimentalObjectRestSpread": true
+      }
+    }
   }
 }
