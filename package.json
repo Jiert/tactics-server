@@ -21,10 +21,16 @@
       "sourceType": "module",
       "ecmaFeatures": {
         "experimentalObjectRestSpread": true
+      },
+      "env": {
+        "jasmine": true
       }
     }
   },
   "devDependencies": {
-    "jest": "^20.0.4"
+    "jest": "^20.0.4",
+    "eslint": "^4.5.0",
+    "eslint-config-planet": "^14.0.0",
+    "eslint-plugin-react": "^7.3.0"
   }
 }
