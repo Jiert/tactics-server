@@ -1,11 +1,11 @@
-const activePlayer = (state = {}, action) => {
-  switch (action.type) {  
+const activePlayer = (state = null, action) => {
+  switch (action.type) {
     case 'SET_ACTIVE_PLAYER':
-      return action.payload
+      return action.payload;
 
     default:
       return state;
   }
-}
+};
 
 module.exports = activePlayer;

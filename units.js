@@ -11,7 +11,7 @@ module.exports = {
   }),
 
   createNewCastle: commanderId => ({
-    id: Date().now(),
+    id: Date.now(),
     name: 'Castle',
     maxHealth: 100,
     health: 100,

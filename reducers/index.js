@@ -11,6 +11,6 @@ const battleApp = combineReducers({
   players,
   activePlayer,
   unitsByLocation
-})
+});
 
 module.exports = battleApp;
