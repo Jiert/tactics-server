@@ -26,6 +26,44 @@ const listener = () => {
   socket.emit('change', store.getState());
 };
 
+const locationsForPlayer = {
+  0: {
+    units: [{x: 4, y: 6}, {x: 6, y: 6}, {x: 6, y: 4}],
+    castle: {x: 4, y: 4}
+  },
+  1: {
+    units: [{x: 27, y: 15}, {x: 25, y: 15}, {x: 25, y: 17}],
+    castle: {x: 27, y: 17}
+  }
+};
+
+const generateUnitsForPlayer = (playerId, index) => {
+  const unitLocations = locationsForPlayer[index].units;
+  const castleLocation = locationsForPlayer[index].castle;
+  const castle = createNewCastle(playerId);
+
+  store.dispatch(actions.addUnit(castle));
+  store.dispatch(actions.setUnitLocation(castle.id, castleLocation));
+
+  unitLocations.forEach(location => {
+    const unit = createNewWarrior(playerId);
+    store.dispatch(actions.addUnit(unit));
+    store.dispatch(actions.setUnitLocation(unit.id, location));
+  });
+};
+
+const generateUnits = () => {
+  const state = store.getState();
+  const playerKeys = Object.keys(state.players);
+
+  // TODO: Change this based on number of players
+  if (playerKeys.length === 2) {
+    playerKeys.forEach((key, index) => {
+      generateUnitsForPlayer(key, index);
+    });
+  }
+};
+
 const unsubscribe = store.subscribe(listener);
 
 socket.on('connection', client => {
@@ -62,6 +100,7 @@ socket.on('connection', client => {
   // TODO: Limit number of requests
   client.on('submitPlayerRequest', player => {
     store.dispatch(actions.addPlayer(player));
+    generateUnits();
   });
 
   client.on('setActivePlayer', playerId => {

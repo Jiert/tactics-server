@@ -1,6 +1,10 @@
+const makeId = () => {
+  return `${Date.now()}-${Math.round(Math.random() * 10000000)}`;
+};
+
 module.exports = {
   createNewWarrior: commanderId => ({
-    id: Date.now(),
+    id: makeId(),
     name: 'Warrior',
     maxHealth: 10,
     health: 10,
@@ -11,7 +15,7 @@ module.exports = {
   }),
 
   createNewCastle: commanderId => ({
-    id: Date.now(),
+    id: makeId(),
     name: 'Castle',
     maxHealth: 100,
     health: 100,
