@@ -4,6 +4,7 @@ const makeId = () => {
 
 module.exports = {
   createNewWarrior: commanderId => ({
+    attackRange: 1,
     id: makeId(),
     name: 'Warrior',
     maxHealth: 10,
@@ -15,11 +16,23 @@ module.exports = {
   }),
 
   createNewCastle: commanderId => ({
+    attackRange: 2,
     id: makeId(),
     name: 'Castle',
     maxHealth: 100,
     health: 100,
     mobility: 0,
+    symbol: '🏰',
+    commanderId
+  }),
+
+  createNewArcher: commanderId => ({
+    attackRange: 2,
+    id: makeId(),
+    name: 'Archer',
+    maxHealth: 8,
+    health: 8,
+    mobility: 2,
     symbol: '🏰',
     commanderId
   })
