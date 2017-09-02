@@ -39,11 +39,19 @@ const setActivePlayer = playerId => {
   };
 };
 
+const setSqaures = squares => {
+  return {
+    type: 'SET_SQUARES',
+    payload: squares
+  };
+};
+
 module.exports = {
   addUnit,
   addPlayer,
   updateUnit,
   finishTurn,
+  setSqaures,
   setActivePlayer,
   setUnitLocation
 };
