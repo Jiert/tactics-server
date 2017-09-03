@@ -25,6 +25,17 @@ const terrain = {
   [`${14}.${10}`]: terrainTypes.hills
 };
 
+const locationsForPlayer = {
+  0: {
+    units: [{x: 4, y: 6}, {x: 6, y: 6}, {x: 6, y: 4}],
+    castle: {x: 4, y: 4}
+  },
+  1: {
+    units: [{x: 27, y: 15}, {x: 25, y: 15}, {x: 25, y: 17}],
+    castle: {x: 27, y: 17}
+  }
+};
+
 const getSquares = (height, width) => {
   const squares = {};
 
@@ -42,5 +53,6 @@ const getSquares = (height, width) => {
 };
 
 module.exports = {
+  locationsForPlayer,
   getSquares: () => getSquares(board.height, board.width)
 };

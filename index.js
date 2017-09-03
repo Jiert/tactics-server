@@ -6,7 +6,7 @@ const {createStore} = require('redux');
 const battleApp = require('./reducers');
 const actions = require('./actions');
 const {createNewWarrior, createNewCastle} = require('./units');
-const {getSquares} = require('./utils');
+const {getSquares, locationsForPlayer} = require('./utils');
 
 const store = createStore(battleApp);
 const server = http.createServer((req, res) => {
@@ -25,17 +25,6 @@ socket.set('origins', 'http://localhost:3000');
 const listener = () => {
   console.log('state', store.getState());
   socket.emit('change', store.getState());
-};
-
-const locationsForPlayer = {
-  0: {
-    units: [{x: 4, y: 6}, {x: 6, y: 6}, {x: 6, y: 4}],
-    castle: {x: 4, y: 4}
-  },
-  1: {
-    units: [{x: 27, y: 15}, {x: 25, y: 15}, {x: 25, y: 17}],
-    castle: {x: 27, y: 17}
-  }
 };
 
 const generateUnitsForPlayer = (playerId, index) => {
