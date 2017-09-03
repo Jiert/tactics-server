@@ -39,7 +39,7 @@ const setActivePlayer = playerId => {
   };
 };
 
-const setSqaures = squares => {
+const setSquares = squares => {
   return {
     type: 'SET_SQUARES',
     payload: squares
@@ -51,7 +51,7 @@ module.exports = {
   addPlayer,
   updateUnit,
   finishTurn,
-  setSqaures,
+  setSquares,
   setActivePlayer,
   setUnitLocation
 };

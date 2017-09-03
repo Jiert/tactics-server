@@ -6,6 +6,7 @@ const {createStore} = require('redux');
 const battleApp = require('./reducers');
 const actions = require('./actions');
 const {createNewWarrior, createNewCastle} = require('./units');
+const {getSquares} = require('./utils');
 
 const store = createStore(battleApp);
 const server = http.createServer((req, res) => {
@@ -64,10 +65,17 @@ const generateUnits = () => {
   }
 };
 
+const generateSquares = () => {
+  store.dispatch(actions.setSquares(getSquares()));
+};
+
 const unsubscribe = store.subscribe(listener);
 
 socket.on('connection', client => {
   console.log('client connection');
+
+  // Create squares
+  generateSquares();
 
   socket.emit('connect');
 
