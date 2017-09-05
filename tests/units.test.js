@@ -1,3 +1,4 @@
+/* eslint-env jest */
 const reducer = require('../reducers/units');
 
 describe('units reducer', () => {
