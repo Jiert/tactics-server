@@ -12,12 +12,18 @@ const updateUnit = (id, updates) => {
   };
 };
 
+// TODO: Remove in favor of setUnitAtSquare
 const setUnitLocation = (id, location) => {
   return {
     type: 'SET_UNIT_LOCATION',
     payload: {id, location}
   };
 };
+
+const setUnitAtSquare = (unitId, location) => ({
+  type: 'SET_UNIT_AT_SQUARE',
+  payload: {unitId, location}
+});
 
 const finishTurn = id => {
   return {
@@ -53,5 +59,6 @@ module.exports = {
   finishTurn,
   setSquares,
   setActivePlayer,
-  setUnitLocation
+  setUnitLocation,
+  setUnitAtSquare
 };

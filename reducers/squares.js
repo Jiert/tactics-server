@@ -4,6 +4,7 @@ const squares = (state = {}, action) => {
       return Object.assign({}, state, action.payload);
 
     case 'SET_UNIT_AT_SQUARE': {
+      console.log('set unit at square ********************************');
       const location = action.payload.location;
       const coords = `${location.x}.${location.y}`;
       const square = state[coords];
@@ -12,9 +13,11 @@ const squares = (state = {}, action) => {
         unitId: action.payload.unitId
       });
 
-      return Object.assign({}, state, {
+      const newState = Object.assign({}, state, {
         [coords]: newSquare
       });
+
+      return newState;
     }
 
     case 'CLEAR_UNIT_AT_SQUARE': {
@@ -24,6 +27,8 @@ const squares = (state = {}, action) => {
       const newSquare = Object.assign({}, square, {
         unitId: null
       });
+
+      console.log('CLEAR unit at square ****');
 
       return Object.assign({}, state, {
         [coords]: newSquare

@@ -23,7 +23,7 @@ socket.set('origins', 'http://localhost:3000');
 
 // Subscribe to Redux
 const listener = () => {
-  console.log('state', store.getState());
+  // console.log('state', store.getState());
   socket.emit('change', store.getState());
 };
 
@@ -33,12 +33,12 @@ const generateUnitsForPlayer = (playerId, index) => {
   const castle = createNewCastle(playerId);
 
   store.dispatch(actions.addUnit(castle));
-  store.dispatch(actions.setUnitLocation(castle.id, castleLocation));
+  store.dispatch(actions.setUnitAtSquare(castle.id, castleLocation));
 
   unitLocations.forEach(location => {
     const unit = createNewWarrior(playerId);
     store.dispatch(actions.addUnit(unit));
-    store.dispatch(actions.setUnitLocation(unit.id, location));
+    store.dispatch(actions.setUnitAtSquare(unit.id, location));
   });
 };
 
@@ -60,11 +60,11 @@ const generateSquares = () => {
 
 const unsubscribe = store.subscribe(listener);
 
+// Create squares
+generateSquares();
+
 socket.on('connection', client => {
   console.log('client connection');
-
-  // Create squares
-  generateSquares();
 
   socket.emit('connect');
 
@@ -76,18 +76,22 @@ socket.on('connection', client => {
     const unit = createNewWarrior(commanderId);
 
     store.dispatch(actions.addUnit(unit));
-    store.dispatch(actions.setUnitLocation(unit.id, location));
+    store.dispatch(actions.setUnitAtSquare(unit.id, location));
   });
 
   client.on('createNewCastle', (commanderId, location) => {
     const unit = createNewCastle(commanderId);
 
     store.dispatch(actions.addUnit(unit));
-    store.dispatch(actions.setUnitLocation(unit.id, location));
+    store.dispatch(actions.setUnitAtSquare(unit.id, location));
   });
 
-  client.on('setUnitLocation', (unitId, location) => {
-    store.dispatch(actions.setUnitLocation(unitId, location));
+  // client.on('setUnitLocation', (unitId, location) => {
+  //   store.dispatch(actions.setUnitLocation(unitId, location));
+  // });
+
+  client.on('setUnitAtSquare', (unitId, location) => {
+    store.dispatch(actions.setUnitAtSquare(unitId, location));
   });
 
   client.on('updateUnit', (unitId, updates) => {
